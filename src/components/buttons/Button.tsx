@@ -1,10 +1,11 @@
 import React from "react";
 import { ReuseText } from "../text/ReuseText";
+import type { ButtonVariantType } from "../../shared/types/globalTypes";
 
 interface ReuseButtonProps {
   name?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary" | "danger"; //    | "outline" | "ghost";
+  variant?: ButtonVariantType; //    | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   className?: string;
   disabled?: boolean;
@@ -12,7 +13,7 @@ interface ReuseButtonProps {
 }
 
 export const ReuseButton: React.FC<ReuseButtonProps> = ({
-  name = "Button",
+  name,
   onClick,
   variant = "primary",
   className,
@@ -20,7 +21,7 @@ export const ReuseButton: React.FC<ReuseButtonProps> = ({
   icon
 }) => {
   const baseStyles =
-    "flex justify-center items-center gap-x-2 rounded-md border-2 cursor-pointer p-2 ";
+    "flex justify-center items-center gap-x-2 rounded-lg border-2 cursor-pointer px-2 py-1 shadow-[0_0_4px] shadow-gray-600 hover:shadow-[0_0_16px] hover:shadow-[#1976d2]";
 
   const variantStyles: Record<typeof variant, string> = {
     primary: "border-[#1976d2] hover:border-[#155a9c] hover:bg-[#1976d2]",
@@ -36,12 +37,11 @@ export const ReuseButton: React.FC<ReuseButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={`${baseStyles}
-      ${variantStyles[variant]}
-      ${disabled && "cursor-not-allowed opacity-70"})
-      }
+        ${variantStyles[variant]} 
+        ${disabled && "cursor-not-allowed opacity-70"}
         ${className}`}
     >
-      {IconElement && <IconElement />}
+      {IconElement && <IconElement className="w-4" />}
       {name && <ReuseText variant="button">{name}</ReuseText>}
     </button>
   );
