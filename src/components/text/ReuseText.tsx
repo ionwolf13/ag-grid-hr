@@ -1,22 +1,13 @@
 import React from "react";
-
-type TextVariant =
-  | "header1"
-  | "header2"
-  | "header3"
-  | "subtitle1"
-  | "subtitle2"
-  | "body"
-  | "caption"
-  | "button";
+import type { TextVariantType } from "../../shared/types/globalTypes";
 
 interface ReuseTextProps {
-  variant?: TextVariant;
+  variant?: TextVariantType;
   children: React.ReactNode;
   className?: string;
 }
 
-const variantStyles: Record<TextVariant, string> = {
+const variantStyles: Record<TextVariantType, string> = {
   header1: "text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100",
   header2:
     "text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100",

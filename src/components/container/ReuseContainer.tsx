@@ -9,5 +9,11 @@ export const ReuseContainer: React.FC<ReuseContainerInterface> = ({
   children,
   className
 }) => {
-  return <div className={`${className} w-full flex gap-x-2`}>{children}</div>;
+  return (
+    <div
+      className={`${className} w-full flex gap-x-2 items-center justify-center`}
+    >
+      {children}
+    </div>
+  );
 };

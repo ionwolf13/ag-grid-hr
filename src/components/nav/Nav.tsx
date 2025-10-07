@@ -9,7 +9,7 @@ interface NavInterface {
 
 export const Nav: React.FC<NavInterface> = ({ left, middle, right }) => {
   return (
-    <div className=" w-full flex justify-between items-center left">
+    <div className=" w-full flex justify-between items-center left gap-x-2 border-b-2 border-gray-400 pb-4">
       {left && (
         <ReuseContainer className="w-full flex items-center">
           {left}
