@@ -14,7 +14,9 @@ export const Card: React.FC<CardInterface> = ({ header, body, footer }) => {
         <ReuseContainer className="justify-start">{header}</ReuseContainer>
       )}
       {body && (
-        <ReuseContainer className="justify-start">{body}</ReuseContainer>
+        <ReuseContainer className="justify-start flex-col gap-4">
+          {body}
+        </ReuseContainer>
       )}
       {footer && (
         <ReuseContainer className="justify-start">{footer}</ReuseContainer>
