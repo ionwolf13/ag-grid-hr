@@ -5,16 +5,24 @@ interface NavInterface {
   left?: React.ReactNode;
   middle?: React.ReactNode;
   right?: React.ReactNode;
+  className?: string;
+  bottomBorder?: boolean;
 }
 
-export const Nav: React.FC<NavInterface> = ({ left, middle, right }) => {
+export const Nav: React.FC<NavInterface> = ({
+  left,
+  middle,
+  right,
+  className,
+  bottomBorder = true
+}) => {
   return (
-    <div className=" w-full flex justify-between items-center left gap-x-2 border-b-2 border-gray-400 pb-4">
-      {left && (
-        <ReuseContainer className="w-full flex items-center">
-          {left}
-        </ReuseContainer>
-      )}
+    <ReuseContainer
+      className={`w-full flex justify-center items-center left gap-x-2 ${
+        bottomBorder ? "border-b-2 border-gray-400" : ""
+      } ${className}`}
+    >
+      {left && <ReuseContainer className="w-full flex">{left}</ReuseContainer>}
       {middle && (
         <ReuseContainer className="flex-1 flex justify-center">
           {middle}
@@ -23,6 +31,6 @@ export const Nav: React.FC<NavInterface> = ({ left, middle, right }) => {
       {right && (
         <ReuseContainer className="w-min left-auto">{right}</ReuseContainer>
       )}
-    </div>
+    </ReuseContainer>
   );
 };

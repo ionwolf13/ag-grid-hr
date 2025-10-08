@@ -1,7 +1,8 @@
 export enum ButtonVariantEnum {
   primary = "primary",
   secondary = "secondary",
-  dange = "danger"
+  danger = "danger",
+  action = "action"
 }
 
 export enum TextVariantEnum {
@@ -13,4 +14,9 @@ export enum TextVariantEnum {
   body = "body",
   caption = "caption",
   button = "button"
+}
+
+export enum DarkLightEnum {
+  dark = "dark",
+  light = "light"
 }

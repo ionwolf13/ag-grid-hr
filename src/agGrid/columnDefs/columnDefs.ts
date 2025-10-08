@@ -3,7 +3,7 @@ import type { ValueFormatterParams } from "ag-grid-community";
 import { ButtonCell } from "../ReuseCells/ButtonCell";
 
 export const columnDefs: ColDef[] = [
-  { field: "employeeId", colId: "employeeId", sort: "asc" },
+  { field: "employeeId", colId: "employeeId", sort: "asc", editable: false },
   {
     field: "firstName",
     colId: "firstName",
@@ -35,11 +35,12 @@ export const columnDefs: ColDef[] = [
   {
     field: "status",
     colId: "status",
+    cellEditor: "agSelectCellEditor",
+    cellEditorParams: {
+      values: ["1", "2", "3", "4", "5", "6", "7"]
+    },
     width: 100,
-    minWidth: 100,
-    valueFormatter: (params: ValueFormatterParams) => {
-      return `${params.data.position.status}`;
-    }
+    minWidth: 100
   },
   {
     field: "supervisor",
