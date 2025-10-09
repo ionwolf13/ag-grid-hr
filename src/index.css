@@ -18,3 +18,9 @@
   -moz-osx-font-smoothing: grayscale;
   padding: 16px;
 }
+
+.ag-row-hover,
+.ag-row-focus {
+  z-index: 9999 !important;
+  /* Use a value higher than the default row stacking context (e.g., 10 is usually safe) */
+}

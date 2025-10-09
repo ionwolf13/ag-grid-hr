@@ -10,18 +10,22 @@ interface ChipInterface {
     | "purple"
     | "indigo"
     | "pink"
-    | "gray";
+    | "gray"
+    | "orange"
+    | "brown";
 }
 
 const chipColors = {
-  blue: "bg-blue-100 text-blue-800",
-  green: "bg-green-100 text-green-800",
-  red: "bg-red-100 text-red-800",
-  yellow: "bg-yellow-100 text-yellow-800",
-  purple: "bg-purple-100 text-purple-800",
-  indigo: "bg-indigo-100 text-indigo-800",
-  pink: "bg-pink-100 text-pink-800",
-  gray: "bg-gray-200 text-gray-800"
+  blue: "bg-blue-300 text-blue-800 border-1",
+  green: "bg-green-300 text-green-800 border-1",
+  red: "bg-red-300 text-red-800 border-1",
+  yellow: "bg-yellow-300 text-yellow-800 border-1",
+  purple: "bg-purple-300 text-purple-800 border-1",
+  indigo: "bg-indigo-300 text-indigo-800 border-1",
+  pink: "bg-pink-300 text-pink-800 border-1",
+  gray: "bg-gray-300 text-gray-800 border-1",
+  orange: "bg-orange-300 text-orange-800 border-1",
+  brown: "bg-[#87603B] text-[#702F06] border-1"
 };
 
 export const Chip: React.FC<ChipInterface> = ({ name, color = "blue" }) => {
@@ -29,7 +33,7 @@ export const Chip: React.FC<ChipInterface> = ({ name, color = "blue" }) => {
 
   return (
     <span
-      className={`inline-flex items-center px-3 py-1 rounded-xl text-sm font-medium ${chipColor}`}
+      className={`inline-flex items-center bg- px-2 py-0.5 rounded-lg text-sm font-medium ${chipColor}`}
     >
       {name}
     </span>

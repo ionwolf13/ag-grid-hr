@@ -31,6 +31,10 @@ export const Dropdown: React.FC<DropdownInterface> = ({
     <div className="relative w-64">
       <ChevronDown
         onClick={() => setIsOpen(!isOpen)}
+        onBlur={() => {
+          // Delay hiding so click on dropdown works
+          setTimeout(() => setIsOpen(false), 100);
+        }}
         className="absolute right-2 top-1.5"
       />
       <input
@@ -50,7 +54,7 @@ export const Dropdown: React.FC<DropdownInterface> = ({
       />
 
       {isOpen && filtered.length > 0 && (
-        <ul className="absolute z-10 w-full dark:bg-[#182230] border rounded mt-1 max-h-40 overflow-auto shadow-lg">
+        <ul className="absolute z-99999 w-full dark:bg-[#182230] border rounded mt-1 max-h-40 overflow-auto shadow-lg">
           {filtered.map((item) => (
             <li
               key={item}

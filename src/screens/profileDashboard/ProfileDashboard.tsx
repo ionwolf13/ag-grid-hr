@@ -89,7 +89,7 @@ export const ProfileDashboard: React.FC<ProfileDashboardInterface> = () => {
               <HeadingWithContent
                 title={items.title}
                 subtitle={items.subtitle}
-                content={items.icon}
+                icon={items.icon}
                 leftSideContent
               />
             );

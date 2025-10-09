@@ -6,18 +6,19 @@ import { Nav } from "./components/nav/Nav";
 import ReuseButton from "./components/buttons/Button";
 import { User, TableProperties } from "lucide-react";
 import { ReuseHeading } from "./components/heading/ReuseHeading";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ProfileDashboard } from "./screens/profileDashboard/ProfileDashboard";
+import { Overview } from "./screens/overview/Overview";
 
 function App() {
   ModuleRegistry.registerModules([AllEnterpriseModule]);
   LicenseManager.setLicenseKey(import.meta.env.VITE_AG_GRID_KEY);
-
+  const navigate = useNavigate();
   const urlParams = useLocation();
-  const isProfileOrDashboard =
-    urlParams.pathname === "/profile" || urlParams.pathname === "/dashboard";
-  console.log("URLS", urlParams);
-  console.log("is true", isProfileOrDashboard);
+  const isProfileOrDashboard = ["/profile", "/employees", "/overview"].includes(
+    urlParams.pathname
+  );
+
   return (
     <div className="h-full w-full flex flex-col justify-between items-center gap-8">
       {isProfileOrDashboard && (
@@ -29,17 +30,32 @@ function App() {
             />
           ]}
           right={[
-            <ReuseButton name="Overview" icon={TableProperties} />,
-            <ReuseButton name="Dashboard" icon={TableProperties} />,
-            <ReuseButton name="Profile" icon={User} />
+            <ReuseButton
+              name="Overview"
+              icon={TableProperties}
+              onClick={() => navigate("/overview")}
+              showTooltip
+            />,
+            <ReuseButton
+              name="employees"
+              icon={TableProperties}
+              onClick={() => navigate("/employees")}
+              showTooltip
+            />,
+            <ReuseButton
+              name="Profile"
+              icon={User}
+              onClick={() => navigate("/profile")}
+              showTooltip
+            />
           ]}
         />
       )}
       <Routes>
         <Route path="/" element={<div> SignIn/SignUp </div>} />
-        <Route path="/overview" element={<div> Overview </div>} />
+        <Route path="/overview" element={<Overview />} />
         <Route path="/profile" element={<ProfileDashboard />} />
-        <Route path="/dashboard" element={<HrDashboard />} />
+        <Route path="/employees" element={<HrDashboard />} />
         <Route path="*" element={<div> Not Found </div>} />
       </Routes>
     </div>

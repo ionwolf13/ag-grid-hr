@@ -9,6 +9,10 @@ export const ButtonCell: React.FC<ICellRendererParams> = (props) => {
   return (
     <ReuseContainer className="h-full">
       <ReuseButton
+        showTooltip={true}
+        tooltipTitle={
+          props.colDef?.field === "Profile" ? "View Profile" : "Delete Employee"
+        }
         variant={
           props.colDef?.field === "Profile"
             ? ButtonVariantEnum.primary

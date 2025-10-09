@@ -11,7 +11,7 @@ import { ReuseHeading } from "../../components/heading/ReuseHeading";
 import { Input } from "../../components/inputs/Input";
 import { ButtonVariantEnum } from "../../shared/enums/globalEnums";
 import { Dropdown } from "../../components/inputs/Dropdown";
-import { Chip } from "../../components/chips/chip";
+import { MetricCardRow } from "../../components/card/MetricCardRow";
 
 export const HrDashboard = () => {
   const dashBoardSummary: {
@@ -39,18 +39,27 @@ export const HrDashboard = () => {
     }
   );
 
-  const metricTitles = {
-    departments: "Departments",
-    totalEmployees: "Total Employees",
-    activeEmployees: "Active Employees",
-    salary: "Avg. Salary"
-  };
-
-  const metricIcons = {
-    departments: Building,
-    totalEmployees: Users,
-    activeEmployees: Activity,
-    salary: DollarSign
+  const metricData = {
+    departments: {
+      title: "Departments",
+      icon: Building,
+      value: dashBoardSummary.departments
+    },
+    totalEmployees: {
+      title: "Total Employees",
+      icon: Users,
+      value: dashBoardSummary.totalEmployees
+    },
+    activeEmployees: {
+      title: "Active Employees",
+      icon: Activity,
+      value: dashBoardSummary.activeEmployees
+    },
+    salary: {
+      title: "Avg. Salary",
+      icon: DollarSign,
+      value: dashBoardSummary.salary
+    }
   };
 
   const keys: (keyof typeof dashBoardSummary)[] = [
@@ -66,20 +75,7 @@ export const HrDashboard = () => {
 
   return (
     <ReuseContainer className="flex-col gap-8">
-      <ReuseContainer className="justify-evenly">
-        {keys.map((key) => (
-          <MetricCard
-            key={`metric-card-${key}`}
-            title={metricTitles[key]}
-            icon={metricIcons[key]}
-            value={
-              key === "departments"
-                ? dashBoardSummary[key].length
-                : Number(dashBoardSummary[key]).toLocaleString()
-            }
-          />
-        ))}
-      </ReuseContainer>
+      <MetricCardRow keys={keys} data={metricData} />
       <ReuseContainer className="flex-col gap-2">
         <Nav
           bottomBorder={false}
@@ -87,7 +83,6 @@ export const HrDashboard = () => {
           left={[<ReuseHeading title="All Employees" />]}
           middle={[<div></div>]}
           right={[
-            <Chip name="Chippie" />,
             <Dropdown />,
             <Input
               value={test}
@@ -100,17 +95,23 @@ export const HrDashboard = () => {
               name="Employee"
               variant={ButtonVariantEnum.secondary}
               icon={Plus}
+              showTooltip
+              tooltipTitle="New Employee"
             />,
             <ReuseButton
               name="Save"
               variant={ButtonVariantEnum.secondary}
               icon={Save}
+              showTooltip
+              tooltipTitle="Save Updates"
               disabled
             />,
             <ReuseButton
               name="Download"
               variant={ButtonVariantEnum.action}
               icon={FileDown}
+              showTooltip
+              tooltipTitle="Download Table"
             />
           ]}
         />

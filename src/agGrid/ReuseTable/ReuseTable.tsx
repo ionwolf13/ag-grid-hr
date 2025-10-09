@@ -28,7 +28,6 @@ export const ReuseTable: React.FC = ({ data }) => {
         defaultColDef={defaultColumnDefProperties}
         theme={`legacy`}
         groupTotalRow={"top"}
-        // pinnedBottomRowData={[{ name: "Grand Total" }]}
       />
     </div>
   );
