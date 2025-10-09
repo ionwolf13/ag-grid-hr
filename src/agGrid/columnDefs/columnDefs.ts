@@ -1,6 +1,7 @@
 import type { ColDef } from "ag-grid-community";
 import type { ValueFormatterParams } from "ag-grid-community";
 import { ButtonCell } from "../ReuseCells/ButtonCell";
+import { ChipCell } from "../ReuseCells/ChipCells";
 
 export const columnDefs: ColDef[] = [
   { field: "employeeId", colId: "employeeId", sort: "asc", editable: false },
@@ -21,9 +22,11 @@ export const columnDefs: ColDef[] = [
   {
     field: "department",
     colId: "department",
-    valueFormatter: (params: ValueFormatterParams) => {
-      return `${params.data.position.department}`;
-    }
+    cellEditor: "agSelectCellEditor",
+    cellEditorParams: {
+      values: ["Marketing", "HR", "Finance", "Sales", "Design", "Engineering"]
+    },
+    cellRenderer: ChipCell
   },
   {
     field: "position",
@@ -37,8 +40,9 @@ export const columnDefs: ColDef[] = [
     colId: "status",
     cellEditor: "agSelectCellEditor",
     cellEditorParams: {
-      values: ["1", "2", "3", "4", "5", "6", "7"]
+      values: ["active", "inactive"]
     },
+    cellRenderer: ChipCell,
     width: 100,
     minWidth: 100
   },
@@ -88,5 +92,9 @@ export const defaultColumnDefProperties: ColDef = {
   width: 164,
   flex: 1,
   resizable: true,
-  editable: true
+  editable: true,
+  cellClass: "ag-cell-allow-overflow",
+  cellStyle: {
+    overflow: "visible"
+  }
 };

@@ -13,7 +13,8 @@ export enum TextVariantEnum {
   subtitle2 = "subtitle2",
   body = "body",
   caption = "caption",
-  button = "button"
+  button = "button",
+  tooltip = "tooltip"
 }
 
 export enum DarkLightEnum {

@@ -18,7 +18,9 @@ const variantStyles: Record<TextVariantType, string> = {
   body: "text-base text-gray-800 dark:text-gray-300",
   caption: "text-sm text-gray-500 dark:text-gray-400",
   button:
-    "text-sm font-semibold uppercase tracking-wide text-gray-50 dark:text-gray-200"
+    "text-sm font-semibold uppercase tracking-wide text-gray-50 dark:text-gray-200",
+    tooltip: "text-xs font-medium text-gray-100 bg-[#182230] px-2 py-1 rounded-md shadow-md",
+
 };
 
 export const ReuseText: React.FC<ReuseTextProps> = ({

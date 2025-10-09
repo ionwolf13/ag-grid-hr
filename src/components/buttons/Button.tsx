@@ -1,6 +1,7 @@
 import React from "react";
 import { ReuseText } from "../text/ReuseText";
 import type { ButtonVariantType } from "../../shared/types/globalTypes";
+import { Tooltip } from "../tooltip/Tooltip";
 
 interface ReuseButtonProps {
   name?: string;
@@ -10,6 +11,8 @@ interface ReuseButtonProps {
   className?: string;
   disabled?: boolean;
   icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  tooltipTitle?: string;
+  showTooltip?: boolean;
 }
 
 export const ReuseButton: React.FC<ReuseButtonProps> = ({
@@ -18,7 +21,9 @@ export const ReuseButton: React.FC<ReuseButtonProps> = ({
   variant = "primary",
   className,
   disabled = false,
-  icon
+  icon,
+  tooltipTitle = name,
+  showTooltip = false
 }) => {
   const baseStyles =
     "flex justify-center items-center gap-x-2 rounded-lg border-2 cursor-pointer px-2 py-1 ";
@@ -36,15 +41,30 @@ export const ReuseButton: React.FC<ReuseButtonProps> = ({
 
   const IconElement = icon;
 
-  return (
+  return showTooltip ? (
+    <Tooltip tooltipTitle={tooltipTitle}>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled}
+        className={`${baseStyles}
+        ${!disabled && variantStyles[variant]} 
+        ${disabled && "cursor-not-allowed opacity-70"}
+        ${className}`}
+      >
+        {IconElement && <IconElement className="w-4" />}
+        {name && <ReuseText variant="button">{name}</ReuseText>}
+      </button>
+    </Tooltip>
+  ) : (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
       className={`${baseStyles}
-        ${!disabled && variantStyles[variant]} 
-        ${disabled && "cursor-not-allowed opacity-70"}
-        ${className}`}
+  ${!disabled && variantStyles[variant]} 
+  ${disabled && "cursor-not-allowed opacity-70"}
+  ${className}`}
     >
       {IconElement && <IconElement className="w-4" />}
       {name && <ReuseText variant="button">{name}</ReuseText>}

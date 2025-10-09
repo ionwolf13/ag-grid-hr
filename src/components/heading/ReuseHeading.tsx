@@ -8,17 +8,20 @@ interface ReuseHeadingInterface {
   title?: string;
   titleVariant?: TextVariantType;
   subtitle?: string;
+  caption?: string;
 }
 
 export const ReuseHeading: React.FC<ReuseHeadingInterface> = ({
   title,
   subtitle,
-  titleVariant = TextVariantEnum.header2
+  titleVariant = TextVariantEnum.header2,
+  caption
 }) => {
   return (
     <ReuseContainer className="flex-col items-start">
       {title && <ReuseText variant={titleVariant}> {title}</ReuseText>}
       {subtitle && <ReuseText variant="subtitle2">{subtitle}</ReuseText>}
+      {caption && <ReuseText variant="tooltip"> {caption}</ReuseText>}
     </ReuseContainer>
   );
 };
