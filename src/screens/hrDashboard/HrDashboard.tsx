@@ -12,6 +12,7 @@ import { Input } from "../../components/inputs/Input";
 import { ButtonVariantEnum } from "../../shared/enums/globalEnums";
 import { Dropdown } from "../../components/inputs/Dropdown";
 import { MetricCardRow } from "../../components/card/MetricCardRow";
+import { employeeColumnDefs } from "../../agGrid/columnDefs/employeeColumnDefs";
 
 export const HrDashboard = () => {
   const dashBoardSummary: {
@@ -115,7 +116,7 @@ export const HrDashboard = () => {
             />
           ]}
         />
-        <ReuseTable data={dataSetOne} />
+        <ReuseTable data={dataSetOne} columnDefs={employeeColumnDefs} />
       </ReuseContainer>
     </ReuseContainer>
   );

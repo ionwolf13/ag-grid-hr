@@ -3,7 +3,7 @@ import type { ValueFormatterParams } from "ag-grid-community";
 import { ButtonCell } from "../ReuseCells/ButtonCell";
 import { ChipCell } from "../ReuseCells/ChipCells";
 
-export const columnDefs: ColDef[] = [
+export const jobColumnDefs: ColDef[] = [
   { field: "employeeId", colId: "employeeId", sort: "asc", editable: false },
   {
     field: "firstName",

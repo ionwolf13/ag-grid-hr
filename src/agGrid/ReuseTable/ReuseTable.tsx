@@ -1,22 +1,22 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
-import {
-  columnDefs,
-  defaultColumnDefProperties
-} from "../columnDefs/columnDefs";
+import { defaultColumnDefProperties } from "../columnDefs/employeeColumnDefs";
+import type { ColDef } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-interface ReuseTable {
+interface ReuseTableInterface {
   data: any[];
+  columnDefs: ColDef[];
 }
 
-export const ReuseTable: React.FC = ({ data }) => {
-  const hrColumnDefs = columnDefs;
-
+export const ReuseTable: React.FC<ReuseTableInterface> = ({
+  data,
+  columnDefs
+}) => {
   return (
     <div
       className={`ag-theme-quartz-dark`}
@@ -24,7 +24,7 @@ export const ReuseTable: React.FC = ({ data }) => {
     >
       <AgGridReact
         rowData={data}
-        columnDefs={hrColumnDefs}
+        columnDefs={columnDefs}
         defaultColDef={defaultColumnDefProperties}
         theme={`legacy`}
         groupTotalRow={"top"}
