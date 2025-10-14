@@ -36,7 +36,7 @@ export const HrDashboard = () => {
       departments: [] as string[],
       totalEmployees: 0,
       activeEmployees: 0,
-      salary: 0
+      salary: 0,
     }
   );
 
@@ -44,30 +44,30 @@ export const HrDashboard = () => {
     departments: {
       title: "Departments",
       icon: Building,
-      value: dashBoardSummary.departments
+      value: dashBoardSummary.departments,
     },
     totalEmployees: {
       title: "Total Employees",
       icon: Users,
-      value: dashBoardSummary.totalEmployees
+      value: dashBoardSummary.totalEmployees,
     },
     activeEmployees: {
       title: "Active Employees",
       icon: Activity,
-      value: dashBoardSummary.activeEmployees
+      value: dashBoardSummary.activeEmployees,
     },
     salary: {
       title: "Avg. Salary",
       icon: DollarSign,
-      value: dashBoardSummary.salary
-    }
+      value: dashBoardSummary.salary,
+    },
   };
 
   const keys: (keyof typeof dashBoardSummary)[] = [
     "totalEmployees",
     "activeEmployees",
     "departments",
-    "salary"
+    "salary",
   ];
 
   const [test, setTest] = React.useState<string>("");
@@ -82,7 +82,7 @@ export const HrDashboard = () => {
           bottomBorder={false}
           className="border-t-2 border-sky-900 pt-2"
           left={[<ReuseHeading title="All Employees" />]}
-          middle={[<div></div>]}
+          middle={[]}
           right={[
             <Dropdown />,
             <Input
@@ -113,7 +113,7 @@ export const HrDashboard = () => {
               icon={FileDown}
               showTooltip
               tooltipTitle="Download Table"
-            />
+            />,
           ]}
         />
         <ReuseTable data={dataSetOne} columnDefs={employeeColumnDefs} />

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { DarkLightType } from "../shared/types/globalTypes";
+import type { DarkLightType } from "../../shared/types/globalTypes";
 
 type ThemeStoreType = {
   theme: DarkLightType;

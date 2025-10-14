@@ -1,6 +1,6 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
-import { defaultColumnDefProperties } from "../columnDefs/employeeColumnDefs";
+import { defaultColumnDefProperties } from "../columnDefs/defaultColumnDefs";
 import type { ColDef } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -15,7 +15,7 @@ interface ReuseTableInterface {
 
 export const ReuseTable: React.FC<ReuseTableInterface> = ({
   data,
-  columnDefs
+  columnDefs,
 }) => {
   return (
     <div

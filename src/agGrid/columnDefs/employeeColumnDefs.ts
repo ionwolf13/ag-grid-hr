@@ -10,48 +10,48 @@ export const employeeColumnDefs: ColDef[] = [
     colId: "firstName",
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.name.first}`;
-    }
+    },
   },
   {
     field: "lastName",
     colId: "lastName",
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.name.last}`;
-    }
+    },
   },
   {
     field: "department",
     colId: "department",
     cellEditor: "agSelectCellEditor",
     cellEditorParams: {
-      values: ["Marketing", "HR", "Finance", "Sales", "Design", "Engineering"]
+      values: ["Marketing", "HR", "Finance", "Sales", "Design", "Engineering"],
     },
-    cellRenderer: ChipCell
+    cellRenderer: ChipCell,
   },
   {
     field: "position",
     colId: "position",
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.position.title}`;
-    }
+    },
   },
   {
     field: "status",
     colId: "status",
     cellEditor: "agSelectCellEditor",
     cellEditorParams: {
-      values: ["active", "inactive"]
+      values: ["active", "inactive"],
     },
     cellRenderer: ChipCell,
     width: 100,
-    minWidth: 100
+    minWidth: 100,
   },
   {
     field: "supervisor",
     colId: "supervisor",
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.position.reportsTo}`;
-    }
+    },
   },
   {
     field: "email",
@@ -60,7 +60,7 @@ export const employeeColumnDefs: ColDef[] = [
     minWidth: 200,
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.contact.email}`;
-    }
+    },
   },
   {
     field: "phone",
@@ -69,32 +69,20 @@ export const employeeColumnDefs: ColDef[] = [
     colId: "phone",
     valueFormatter: (params: ValueFormatterParams) => {
       return `${params.data.contact.phone}`;
-    }
+    },
   },
   {
     field: "Profile",
     width: 100,
     minWidth: 100,
     editable: false,
-    cellRenderer: ButtonCell
+    cellRenderer: ButtonCell,
   },
   {
     field: "Delete",
     width: 100,
     minWidth: 100,
     editable: false,
-    cellRenderer: ButtonCell
-  }
+    cellRenderer: ButtonCell,
+  },
 ];
-
-export const defaultColumnDefProperties: ColDef = {
-  minWidth: 164,
-  width: 164,
-  flex: 1,
-  resizable: true,
-  editable: true,
-  cellClass: "ag-cell-allow-overflow",
-  cellStyle: {
-    overflow: "visible"
-  }
-};
