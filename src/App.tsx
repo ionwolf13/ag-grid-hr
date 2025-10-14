@@ -9,15 +9,19 @@ import { ReuseHeading } from "./components/heading/ReuseHeading";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ProfileDashboard } from "./screens/profileDashboard/ProfileDashboard";
 import { Overview } from "./screens/overview/Overview";
+import { Jobs } from "./screens/jobs/Jobs";
 
 function App() {
   ModuleRegistry.registerModules([AllEnterpriseModule]);
   LicenseManager.setLicenseKey(import.meta.env.VITE_AG_GRID_KEY);
   const navigate = useNavigate();
   const urlParams = useLocation();
-  const isProfileOrDashboard = ["/profile", "/employees", "/overview"].includes(
-    urlParams.pathname
-  );
+  const isProfileOrDashboard = [
+    "/profile",
+    "/employees",
+    "/overview",
+    "/jobs"
+  ].includes(urlParams.pathname);
 
   return (
     <div className="h-full w-full flex flex-col justify-between items-center gap-8">
@@ -37,6 +41,12 @@ function App() {
               showTooltip
             />,
             <ReuseButton
+              name="Jobs"
+              icon={User}
+              onClick={() => navigate("/jobs")}
+              showTooltip
+            />,
+            <ReuseButton
               name="employees"
               icon={TableProperties}
               onClick={() => navigate("/employees")}
@@ -53,6 +63,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<div> SignIn/SignUp </div>} />
+        <Route path="/jobs" element={<Jobs />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/employees" element={<HrDashboard />} />
