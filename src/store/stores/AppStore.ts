@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { mockEmployees } from "../data/v0MockDataUser";
-import type { EmployeeType } from "../data/v0MockDataUser";
+import { mockEmployees } from "../../data/v0MockDataUser";
+import type { EmployeeType } from "../../data/v0MockDataUser";
 
 type AppStoreType = {
   hrEmployees: EmployeeType[];

@@ -13,6 +13,7 @@ interface InputInterface {
   required?: boolean;
   disabled?: boolean;
   icon?: LucideIconType;
+  iconAction?: () => void;
 }
 
 export const Input: React.FC<InputInterface> = ({
@@ -24,8 +25,10 @@ export const Input: React.FC<InputInterface> = ({
   type = "text",
   required = false,
   disabled = false,
-  icon = Search
+  icon = Search,
+  iconAction,
 }) => {
+  const isInputPassword = name === "password";
   const Icon = icon;
   return (
     <ReuseContainer className="flex flex-col gap-1 w-xs relative">
@@ -38,7 +41,12 @@ export const Input: React.FC<InputInterface> = ({
         </label>
       )}
 
-      <Icon className="absolute left-2 h-5" />
+      <Icon
+        className={`absolute left-2 h-5 ${
+          isInputPassword ? "cursor-pointer" : ""
+        }`}
+        onClick={isInputPassword ? iconAction : undefined}
+      />
 
       <input
         type={type}

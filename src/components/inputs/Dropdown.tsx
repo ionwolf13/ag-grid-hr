@@ -5,19 +5,19 @@ interface DropdownInterface {
   items: string[];
 }
 const mockItems = [
-  "Apple",
-  "Banana",
-  "Cherry",
-  "Date",
-  "Grape",
-  "Kiwi",
-  "Mango",
-  "Orange",
-  "Peach"
+  "All Departments",
+  "Customer Service",
+  "Design",
+  "Engineering",
+  "Finance",
+  "HR",
+  "Marketing",
+  "Product",
+  "Sales",
 ];
 
 export const Dropdown: React.FC<DropdownInterface> = ({
-  items = mockItems
+  items = mockItems,
 }) => {
   const [query, setQuery] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
