@@ -6,9 +6,19 @@ import { Card } from "../../components/card/Card";
 import { HeadingWithContent } from "../../components/heading/HeadingWithContent";
 import ReuseButton from "../../components/buttons/Button";
 import { TextVariantEnum } from "../../shared/enums/globalEnums";
-import { CheckCircle, CircleX } from "lucide-react";
+import { CheckCircle, CircleX, TrendingUp } from "lucide-react";
+import { ResponsiveBar } from "@nivo/bar";
 
 // interface OverviewInterface {}
+const dataSEts = [
+  { category: "A", value: 10 },
+  { category: "B", value: 20 },
+  { category: "C", value: 15 },
+  { category: "D", value: 10 },
+  { category: "E", value: 20 },
+  { category: "F", value: 15 }
+  // Add more data as needed
+];
 
 export const Overview: React.FC = () => {
   const data = {
@@ -52,7 +62,7 @@ export const Overview: React.FC = () => {
             titleVariant={TextVariantEnum.header3}
           />
         }
-        body={
+        body={[
           <Card
             header={
               <HeadingWithContent
@@ -78,8 +88,26 @@ export const Overview: React.FC = () => {
                 titleVariant={TextVariantEnum.header3}
               />
             }
+          />,
+          <Card
+            header={[
+              <HeadingWithContent
+                title="Employee Growth"
+                subtitle="Total Headcount Over Time"
+                icon={TrendingUp}
+              />
+            ]}
+            body={[
+              <div className="h-40 w-full">
+                <ResponsiveBar
+                  data={dataSEts}
+                  defaultHeight={10}
+                  defaultWidth={0}
+                />
+              </div>
+            ]}
           />
-        }
+        ]}
       />
     </ReuseContainer>
   );
