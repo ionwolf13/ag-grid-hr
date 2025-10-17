@@ -1,53 +1,70 @@
 import { create } from "zustand";
-import type { EmployeeType } from "../../data/v0MockDataUser";
-import { useNavigate } from "react-router-dom";
+import { fetchAuthenticateUser } from "../../apis/fetchAuthenticateUser";
+
+type AuthorizedUserType = {
+  id: null;
+  email: null;
+  firstName: null;
+  lastName: null;
+  avatarUrl: null;
+} | null;
 
 type AuthStoreType = {
   // Security Core
-  isAuthenticated: false;
+  isAuthenticated: boolean;
   accessToken: null;
   refreshToken: null;
-  isLoading: false;
+  isLoading: boolean;
   error: null;
 
   // User Identity
-  user: {
-    id: null;
-    email: null;
-    firstName: null;
-    lastName: null;
-    avatarUrl: null;
-  } | null;
+  user: AuthorizedUserType;
 
   // Authorization
   roles: [];
   permissions: [];
   // API Calls
-  callAuthenticateUser: () => void;
+  callAuthenticateUser: (username: string, password: string) => void;
   callLogOutUser: () => void;
 };
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
   user: null,
+  isAuthenticated: false,
+  accessToken: null,
+  refreshToken: null,
+  isLoading: false,
+  error: null,
+  roles: [],
+  permissions: [],
   // Actions
-  setUser: (user: EmployeeType | null) =>
-    set({
-      user: {
-        id: tempuser.employeeId,
-        email: tempuser.email,
-        firstName: tempuser.firstName,
-        lastName: tempuser.lastName,
-        avatarUrl: null,
-      },
-    }),
+  setUser: (user: AuthorizedUserType | null) => {
+    if (user) {
+      set({
+        user: {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          avatarUrl: user.avatarUrl
+        }
+      });
+    } else {
+      set({ user: null });
+    }
+  },
   setIsAuthenticated: (isAuthenticated: boolean) => set({ isAuthenticated }),
   // API Calls
-  callAuthenticateUser: () => {
+  callAuthenticateUser: async (username: string, password: string) => {
+    console.log("RECEIVED", username, " - - -", password);
     set({ isLoading: true });
-    setTimeout(() => {}, 2000);
-    set({ isAuthenticated: true });
-    setTimeout(() => {}, 2000);
-    set({ isLoading: false });
+    setTimeout(() => {
+      set({ isAuthenticated: true });
+    }, 2000);
+    fetchAuthenticateUser(username, password);
+    setTimeout(() => {
+      set({ isLoading: false });
+    }, 2000);
   },
   callLogOutUser: () => {
     set({ isLoading: true });
@@ -57,7 +74,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     setTimeout(() => {
       set({ isLoading: false });
     }, 2000);
-  },
+  }
 }));
 
 const tempuser = {
@@ -73,12 +90,12 @@ const tempuser = {
     street: "123 Main Street",
     city: "San Francisco",
     state: "CA",
-    zipCode: "94102",
+    zipCode: "94102"
   },
   emergencyContact: {
     name: "John Johnson",
     relationship: "Spouse",
-    phoneNumber: "+1 (555) 123-4568",
+    phoneNumber: "+1 (555) 123-4568"
   },
   department: "Engineering",
   position: "Software Engineer",
@@ -96,7 +113,7 @@ const tempuser = {
     health: true,
     dental: true,
     vision: true,
-    retirement401k: true,
+    retirement401k: true
   },
   ptoBalance: 18,
   vacationDaysTaken: 7,
@@ -112,7 +129,7 @@ const tempuser = {
   goals: [
     "Lead migration to microservices architecture",
     "Mentor 2 junior developers",
-    "Complete AWS certification",
+    "Complete AWS certification"
   ],
   skills: ["React", "Node.js", "TypeScript", "AWS", "Docker"],
   certifications: ["AWS Solutions Architect", "Scrum Master"],
@@ -127,31 +144,31 @@ const tempuser = {
       degree: "Master of Science in Computer Science",
       institution: "Stanford University",
       graduationYear: 2016,
-      gpa: 3.8,
+      gpa: 3.8
     },
     {
       degree: "Bachelor of Science in Software Engineering",
       institution: "UC Berkeley",
       graduationYear: 2014,
-      gpa: 3.6,
-    },
+      gpa: 3.6
+    }
   ],
   languages: [
     { language: "English", proficiency: "Native" },
-    { language: "Spanish", proficiency: "Intermediate" },
+    { language: "Spanish", proficiency: "Intermediate" }
   ],
   professionalMemberships: ["IEEE", "ACM"],
   publications: ["Microservices Architecture Best Practices (2023)"],
   workAuthorization: {
     status: "Citizen",
-    sponsorshipRequired: false,
+    sponsorshipRequired: false
   },
   onboarding: {
     orientationCompleted: true,
     orientationDate: "2018-05-15",
     equipmentSetup: true,
     systemAccessProvisioned: true,
-    onboardingProgress: 100,
+    onboardingProgress: 100
   },
   performanceManagement: {
     feedback360Completed: true,
@@ -161,33 +178,33 @@ const tempuser = {
         date: "2021-06-01",
         fromPosition: "Junior Software Engineer",
         toPosition: "Software Engineer",
-        salaryIncrease: 15000,
+        salaryIncrease: 15000
       },
       {
         date: "2023-06-01",
         fromPosition: "Software Engineer",
         toPosition: "Senior Software Engineer",
-        salaryIncrease: 20000,
-      },
+        salaryIncrease: 20000
+      }
     ],
     disciplinaryActions: [],
     awards: [
       {
         date: "2024-01-15",
         title: "Employee of the Quarter",
-        description: "Outstanding contribution to platform migration",
-      },
-    ],
+        description: "Outstanding contribution to platform migration"
+      }
+    ]
   },
   workplaceAccommodations: {
     workspacePreferences: "Standing desk, dual monitors",
     ergonomicEquipment: [
       "Standing desk",
       "Ergonomic keyboard",
-      "Vertical mouse",
+      "Vertical mouse"
     ],
     parkingAssignment: "P1-A23",
-    buildingAccessLevel: "Full Access",
+    buildingAccessLevel: "Full Access"
   },
   organizationalDevelopment: {
     successionPlanningStatus: "Identified",
@@ -196,7 +213,7 @@ const tempuser = {
     mentorshipRole: "Mentor",
     menteeName: "Emma Davis",
     internalMobilityInterests: ["Engineering Manager", "Tech Lead"],
-    careerPathStage: "Senior Individual Contributor",
+    careerPathStage: "Senior Individual Contributor"
   },
   engagementCulture: {
     engagementScore: 92,
@@ -204,17 +221,17 @@ const tempuser = {
     satisfactionRating: 9,
     teamFitRating: 10,
     volunteerActivities: ["Code for Good", "Tech Mentorship Program"],
-    companyEventsAttended: 12,
+    companyEventsAttended: 12
   },
   financialPayroll: {
     payrollHistory: [
       { date: "2024-09-30", amount: 7916, type: "Salary" },
       { date: "2024-08-31", amount: 7916, type: "Salary" },
-      { date: "2024-07-31", amount: 7916, type: "Salary" },
+      { date: "2024-07-31", amount: 7916, type: "Salary" }
     ],
     expenseReimbursements: 450,
     costCenter: "ENG-001",
-    budgetResponsibility: 50000,
+    budgetResponsibility: 50000
   },
   complianceSecurity: {
     securityClearanceLevel: "Level 2",
@@ -224,28 +241,28 @@ const tempuser = {
     dataAccessPermissions: [
       "Production Database",
       "AWS Console",
-      "GitHub Admin",
+      "GitHub Admin"
     ],
     complianceTrainingCompleted: [
       "Security Awareness 2024",
       "GDPR Training",
-      "SOC 2 Compliance",
+      "SOC 2 Compliance"
     ],
     policyAcknowledgments: [
       "Code of Conduct",
       "Remote Work Policy",
-      "Data Protection Policy",
-    ],
+      "Data Protection Policy"
+    ]
   },
   analyticsMetrics: {
     punctualityScore: 98,
     productivityMetrics: {
       tasksCompleted: 156,
       averageTaskTime: 4.2,
-      qualityScore: 95,
+      qualityScore: 95
     },
     utilizationRate: 92,
     projectCompletionRate: 98,
-    absenteeismRate: 0.8,
-  },
+    absenteeismRate: 0.8
+  }
 };

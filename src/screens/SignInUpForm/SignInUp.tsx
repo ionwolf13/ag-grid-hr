@@ -3,16 +3,13 @@ import { ReuseContainer } from "../../components/container/ReuseContainer";
 import ReuseText from "../../components/text/ReuseText";
 import hrManagerIcon from "../../assets/hrManager.png";
 import { Card } from "../../components/card/Card";
-import ReuseButton from "../../components/buttons/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/stores/AuthStore";
 import { selectIsAuthenticated } from "../../store/selectors/authSelectors";
-import { Input } from "../../components/inputs/Input";
 import { Eye, EyeClosed, User } from "lucide-react";
+import { ReuseForm } from "../../components/form/ReuseForm";
 
-interface SignInUpInterface {}
-
-export const SignInUp: React.FC<SignInUpInterface> = () => {
+export const SignInUp: React.FC = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = useAuthStore(selectIsAuthenticated);
@@ -48,47 +45,42 @@ export const SignInUp: React.FC<SignInUpInterface> = () => {
     setIsPasswordVisible((prevState: boolean) => !prevState);
   };
 
+  const singInFormData = [
+    {
+      placeholder: "Username",
+      name: "Username",
+      value: username,
+      onChange: onChangeUsername,
+      icon: User
+    },
+    {
+      placeholder: "Password",
+      name: "Password",
+      value: password,
+      onChange: onChangePassword,
+      icon: isPasswordVisible ? Eye : EyeClosed,
+      inputType: isPasswordVisible ? "text" : "password",
+      iconAction: onChangePasswordVisibility
+    }
+  ];
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    callAuthenticateUser(username, password);
+  };
+
   return (
     <ReuseContainer className="flex-col">
       <img src={hrManagerIcon} alt="Hr Manager Icon" className="h-120" />
       <Card
         header={[<ReuseText variant="header2">Welcome</ReuseText>]}
-        body={[
-          <form
-            className="gap-2"
-            name="Sign In"
-            onSubmit={(e) => {
-              console.log("DEBUGGING", e);
-            }}
-          >
-            <Input
-              icon={User}
-              placeholder="Username"
-              name="Username"
-              value={username}
-              onChange={onChangeUsername}
-            />
-            <Input
-              icon={isPasswordVisible ? Eye : EyeClosed}
-              placeholder="Passwrod"
-              name="Password"
-              value={password}
-              onChange={onChangePassword}
-              type={isPasswordVisible ? "text" : "password"}
-              iconAction={onChangePasswordVisibility}
-            />
-            <ReuseButton
-              onClick={() => callAuthenticateUser(username, password)}
-              name={"Sign In"}
-            />
-          </form>,
-        ]}
+        body={[<ReuseForm data={singInFormData} onSubmitForm={onSubmitForm} />]}
         footer={[
           <ReuseContainer className="flex-col">
             <ReuseText>
               <a>Forgot Password? </a>
             </ReuseText>
-          </ReuseContainer>,
+          </ReuseContainer>
         ]}
       />
     </ReuseContainer>
